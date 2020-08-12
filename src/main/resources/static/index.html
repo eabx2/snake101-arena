@@ -1,0 +1,122 @@
+<DOCTYPE html>
+
+    <html>
+
+    <head>
+        <!-- Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css">
+
+    </head>
+
+    <body ng-app="snake101-arena">
+
+    <div ng-controller="MainViewController">
+
+        <div id="nickname-view" class="center" ng-controller="NicknameViewController" ng-if="viewState == 'nickname-view'">
+            <label>Nickname: </label>
+            <input ng-model="nicknameInput" maxlength="16" type="text">
+            <button ng-click="onClickNicknameOkButton(nicknameInput)">Ok</button>
+        </div>
+
+        <div id="roomlist-view" class="center" ng-controller="RoomlistViewController" ng-if="viewState == 'roomlist-view'">
+
+            <ul>
+                <li ng-repeat="roomInfo in roomInfoList" ng-click="selectRoomInfo($index)" ng-dblclick="onClickJoinRoomButton(roomInfoList[$index])" ng-style="{'background-color' : $index === selectedRoomInfoIndex ? 'grey' : '' }">
+                    {{ roomInfo.name }}  -  {{ roomInfo.playersNumber }}/{{ roomInfo.playerCapacity }}
+                </li>
+            </ul>
+            <button ng-click="onClickJoinRoomButton(roomInfoList[selectedRoomInfoIndex])" ng-disabled="selectedRoomInfoIndex == null" >Join Room</button>
+            <button ng-click="onClickCreateButton()">Create Room</button>
+            <button ng-click="onClickRefreshButton()">Refresh</button>
+
+        </div>
+
+        <div id="join-room-password-view" ng-controller="JoinRoomPasswordViewController" class="center" ng-if="viewState == 'join-room-password-view'">
+            <label>Password: </label>
+            <input ng-model="passwordInput" maxlength="8" type="password">
+            <button ng-click="onClickCancelButton()">Cancel</button>
+            <button ng-click="onClickOkButton(passwordInput)">Ok</button>
+        </div>
+
+        <div id="create-room-view" ng-controller="CreateRoomViewController" class="center" ng-if="viewState == 'create-room-view'">
+            <label>Room Name:</label>
+            <input ng-model="roomNameInput" maxlength="32" type="text">
+
+            <label >Password: </label>
+            <input ng-model="passwordInput" type="text">
+
+            <label>Max Players: </label>
+            <input ng-model="maxPlayersInput" placeholder="2"  min="2" type="number">
+
+            <label>Private: </label>
+            <input ng-model="isPrivateInput" type="checkbox">
+
+            <button ng-click="onClickCancelButton()">Cancel</button>
+            <button ng-click="onClickOkButton(roomNameInput,passwordInput,maxPlayersInput,isPrivateInput)">Ok</button>
+        </div>
+
+        <div id="room-view" ng-controller="RoomViewController" ng-if="viewState == 'room-view'">
+
+            <div id="room-lobby-view" class="center" ng-show="gameWindow == 'room-lobby-view'" ng-style="{'background-color' : playerRoomInfo.isReady ? 'grey' : '' }">
+                <span>{{ roomInfo.name }}</span>
+                <ul>
+                    <li ng-repeat="playerRoomInfo in playersRoomInfo" ng-style="{'background-color' : playerRoomInfo.isReady ? 'green' : '' }">
+                        {{ playerRoomInfo.nickname }}
+                    </li>
+                </ul>
+                <button ng-click="onClickReadyButton()">{{ playersRoomInfo[meInRoomId].isReady ? 'Unready' : 'Ready'}}</button>
+                <button ng-click="onClickLeaveButton()">Leave</button>
+                <button ng-click="onClickStartButton()" ng-if="roomInfo.adminInRoomId == meInRoomId">Start</button>
+            </div>
+
+            <div id="room-game-state-view" ng-show="gameWindow == 'room-game-state-view'">
+
+            </div>
+
+            <div id="room-chat-view">
+                <ul>
+                    <li ng-repeat="message in messages" class="message">
+                        {{ message.from }} - {{ message.text }}
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Custom Scripts -->
+
+    <!-- Modules -->
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/MainViewController.js"></script>
+    <script src="js/controllers/NicknameViewController.js"></script>
+    <script src="js/controllers/RoomlistViewController.js"></script>
+    <script src="js/controllers/JoinRoomPasswordViewController.js"></script>
+    <script src="js/controllers/CreateRoomViewController.js"></script>
+    <script src="js/controllers/RoomViewController.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/socket.js"></script>
+    <script src="js/services/bridge.js"></script>
+
+    <!-- Game -->
+    <script src="js/game/Sketch.js"></script>
+
+    </body>
+
+    </html>
+
+</DOCTYPE>

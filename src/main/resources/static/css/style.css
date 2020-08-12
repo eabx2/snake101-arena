@@ -1,0 +1,14 @@
+body {
+    background: white;
+    color: black;
+}
+
+.center {
+    height: 200px;
+    position: relative;
+    border: 3px solid;
+}
+
+.message {
+    list-style-type: none;
+}
