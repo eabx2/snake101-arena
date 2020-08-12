@@ -1,7 +1,7 @@
 app.factory('socket', [function() {
 
     var stompClient = null;
-    var baseAddress = window.location.hostname;
+    var baseAddress = window.location.href;
 
     var mainResponseCallback = function (message) {
 
