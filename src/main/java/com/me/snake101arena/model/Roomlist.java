@@ -1,6 +1,5 @@
 package com.me.snake101arena.model;
 
-import com.me.snake101arena.model.Room;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

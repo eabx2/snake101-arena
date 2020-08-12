@@ -1,15 +1,10 @@
 
 package com.me.snake101arena.game;
 
-import com.sun.javafx.geom.Vec2d;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
