@@ -82,7 +82,7 @@
 
             </div>
 
-            <div id="room-chat-view">
+            <div id="room-chat-view" ng-show="gameWindow == 'room-lobby-view'">
                 <ul>
                     <li ng-repeat="message in messages" class="message">
                         {{ message.from }} - {{ message.text }}

@@ -36,6 +36,8 @@ app.controller('RoomViewController', ['$scope','$rootScope','socket','bridge','$
                 $timeout( function(){
                     $scope.gameWindow = "room-game-state-view";
                     gameDrawableInfo = body.gameDrawableInfo;
+                    if(canvas)
+                        canvas.remove();
                     canvas = new p5(sketch);
                     // pass scope variables
                     canvas.$rootScope = $rootScope;
@@ -117,7 +119,8 @@ app.controller('RoomViewController', ['$scope','$rootScope','socket','bridge','$
 
         $rootScope.socket.unsubscribeRoom($scope.roomInfo.id);
 
-        canvas.remove();
+        if(canvas)
+            canvas.remove();
 
         // get back to roomlist-view
         $rootScope.viewState = "roomlist-view";

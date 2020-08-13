@@ -27,7 +27,7 @@ var sketch = function (s) {
                 s.square(part.x,part.y,gameDrawableInfo.gridSize);
             }
             s.fill(255);
-            s.text(Object.values(s.$scope.playersRoomInfo)[i].nickname,snake.parts[0].x,snake.parts[0].y);
+            s.text(s.$scope.playersRoomInfo[Object.keys(gameDrawableInfo.snakes)[i]].nickname,snake.parts[0].x,snake.parts[0].y);
         }
 
         // draw foods

@@ -135,7 +135,6 @@ public class Room {
     }
 
     public void deleteRoom(){
-        System.out.println(roomlist);
         roomlist.removeRoom(this);
     }
 
