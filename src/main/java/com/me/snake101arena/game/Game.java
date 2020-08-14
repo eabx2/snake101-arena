@@ -82,30 +82,41 @@ public class Game {
 
             // if x and y overlap one the snakes then return false - that means try with different x and y
             inside = !snakes.values().stream().allMatch(snake -> snake.parts.stream().allMatch(point -> {
-                if(point.x != finalX && point.y != finalY)
+                if(point.x != finalX || point.y != finalY)
                     return true;
-                else
+                else{
+                    System.out.println("overlap snakes" +finalX + " " + finalY);
                     return false;
+                }
             }));
+
+            if(inside) continue;
 
             // if x and y overlap one the obstacle then return false - that means try with different x and y
             inside = !obstacles.stream().allMatch(obstacle -> {
-                if(obstacle.x != finalX && obstacle.y != finalY)
+                if(obstacle.x != finalX || obstacle.y != finalY)
                     return true;
-                else
+                else{
+                    System.out.println("overlap obstacle" +finalX + " " + finalY);
                     return false;
+                }
             });
+
+            if(inside) continue;
 
             // if x and y overlap one the food then return false - that means try with different x and y
             inside = !foods.stream().allMatch(food -> {
-                if(food.x != finalX && food.y != finalY)
+                if(food.x != finalX || food.y != finalY)
                     return true;
-                else
+                else{
+                    System.out.println("overlap foods" +finalX + " " + finalY);
                     return false;
+                }
             });
 
         }
 
+        System.out.println("new point" + x + " " + y);
         return new Point(x,y);
 
     }
