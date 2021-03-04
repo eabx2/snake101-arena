@@ -21,7 +21,7 @@ https://snake101-arena.herokuapp.com/
 
 ### Screenshots
 
-![](screenshots/nickname.png)
+![](screenshots/nicknamepng.png)
 
 ![](screenshots/roomlist.png)
 
